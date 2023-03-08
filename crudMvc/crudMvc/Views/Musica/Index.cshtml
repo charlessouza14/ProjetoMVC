@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Lista de Artistas";
+}
+<h1>Lista de Artistas</h1>
+<table class="table">
+    <tr>
+        <td>Id</td>
+        <td>Nome do Cantor</td>
+        <td>Nome da Música</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Suel</td>
+        <td>Proposta</td>
+
+        <td>
+            <a button asp-controller="Musica" asp-action="Put">Editar</a>
+        </td>
+        <td>
+            <a button asp-controller="Musica" asp-action="Get">Buscar</a>
+        </td>
+        <td>
+            <a button asp-controller="Musica" asp-action="Delete">Apagar</a>
+        </td>
+    </tr>
+
+</table>
+<hr/>
+    <a href="Musica/PostForm" type="button" class="btn btn-primary" > Adicionar </a>
