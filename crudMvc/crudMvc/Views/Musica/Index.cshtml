@@ -1,28 +1,35 @@
 ﻿@{
     ViewData["Title"] = "Lista de Artistas";
+    var listaUsuario = ViewBag.Cantores;
 }
-<h1>Lista de Artistas</h1>
+
+    <h1>Lista de Artistas</h1>
 <table class="table">
     <tr>
         <td>Id</td>
         <td>Nome do Cantor</td>
         <td>Nome da Música</td>
     </tr>
-    <tr>
-        <td>1</td>
-        <td>Suel</td>
-        <td>Proposta</td>
+    @{
+        foreach (var c in listaUsuario)
+        {
+            <tr>
+                <td>@c.Id</td>
+                <td>@c.NomeCantor</td>
+                <td>@c.NomeMusica</td>
 
-        <td>
-            <a button asp-controller="Musica" asp-action="Put">Editar</a>
-        </td>
-        <td>
-            <a button asp-controller="Musica" asp-action="Get">Buscar</a>
-        </td>
-        <td>
-            <a button asp-controller="Musica" asp-action="Delete">Apagar</a>
-        </td>
-    </tr>
+                <td>
+                    <a button asp-controller="Musica" asp-action="Put">Editar</a>
+                </td>
+                <td>
+                    <a button asp-controller="Musica" asp-action="Get">Buscar</a>
+                </td>
+                <td>
+                    <a button asp-controller="Musica" asp-action="Delete">Apagar</a>
+                </td>
+            </tr>
+        }
+    }
 
 </table>
 <hr/>

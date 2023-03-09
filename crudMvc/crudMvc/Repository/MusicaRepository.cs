@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
@@ -9,6 +10,12 @@ namespace crudMvc.Repository
 {
     public class MusicaRepository : ControllerBase
     {
+        public List<Cantor> BuscarTudo()
+        {
+            Contexto contexto = new Contexto();
+            var buscar = contexto.Cantor.ToList();
+            return buscar;
+        }
         public void Adicionar(Cantor cantor)
         {
             Contexto contexto = new Contexto();

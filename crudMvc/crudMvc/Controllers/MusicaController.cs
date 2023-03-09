@@ -8,12 +8,23 @@ namespace crudMvc.Controllers
     {
         public IActionResult Index()
         {
-           return View();
+            MusicaRepository musicaRepository = new MusicaRepository();
+            var buscar = musicaRepository.BuscarTudo();
+            ViewBag.Cantores = buscar;
+            return View("Index");
         }
         // irá precisar criar outros indexs
         public IActionResult PostForm()
         {
             return View("Post");
+        }
+
+        public IActionResult GetAll()
+        {
+            MusicaRepository musicaRepository = new MusicaRepository();
+            var buscar = musicaRepository.BuscarTudo();
+            ViewBag.Cantores = buscar; 
+            return View("Index");
         }
 
         public IActionResult Post(Cantor cantor)
@@ -24,7 +35,7 @@ namespace crudMvc.Controllers
             }
             MusicaRepository musicaRespository = new MusicaRepository();
             musicaRespository.Adicionar(cantor);
-            return View("Index");
+            return RedirectToAction("Index","Musica");
         }
 
         public IActionResult Get(Cantor cantor)
