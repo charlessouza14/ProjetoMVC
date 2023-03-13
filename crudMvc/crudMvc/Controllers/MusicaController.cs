@@ -1,6 +1,7 @@
 ﻿using crudMvc.Models;
 using crudMvc.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace crudMvc.Controllers
 {
@@ -8,7 +9,7 @@ namespace crudMvc.Controllers
     {
         public IActionResult Index()
         {
-            MusicaRepository musicaRepository = new MusicaRepository();
+            CantorRepository musicaRepository = new CantorRepository();
             var buscar = musicaRepository.BuscarTudo();
             ViewBag.Cantores = buscar;
             return View("Index");
@@ -19,12 +20,26 @@ namespace crudMvc.Controllers
             return View("Post");
         }
 
+        public IActionResult GetFormUpdate([FromQuery]int id)
+        {
+            CantorRepository cantorRepository = new CantorRepository();
+            var cantorDB = cantorRepository.Buscar(id);
+            ViewBag.Cantor = cantorDB;
+            return View("EditarCantor");
+        }
+        public IActionResult GetForName(string nome)
+        {
+            CantorRepository cantorRepository = new CantorRepository();
+            var buscarNome = cantorRepository.BuscarPorNome(nome);
+            ViewBag.Nome = buscarNome;
+            return View("ExibirCantor");
+        }
         public IActionResult GetAll()
         {
-            MusicaRepository musicaRepository = new MusicaRepository();
+            CantorRepository musicaRepository = new CantorRepository();
             var buscar = musicaRepository.BuscarTudo();
             ViewBag.Cantores = buscar; 
-            return View("Index");
+            return View("Index","Musica");
         }
 
         public IActionResult Post(Cantor cantor)
@@ -33,30 +48,30 @@ namespace crudMvc.Controllers
             {
                 return View("Por favor digite um nome válido");
             }
-            MusicaRepository musicaRespository = new MusicaRepository();
+            CantorRepository musicaRespository = new CantorRepository();
             musicaRespository.Adicionar(cantor);
             return RedirectToAction("Index","Musica");
         }
 
         public IActionResult Get(Cantor cantor)
         {
-            MusicaRepository musicaRepository = new MusicaRepository();
+            CantorRepository musicaRepository = new CantorRepository();
             musicaRepository.BuscarPorNome(cantor.NomeCantor);
             return View("Get");
         }
         
         public IActionResult Put(Cantor cantor)
         {
-            MusicaRepository musicaRepository = new MusicaRepository();
-            musicaRepository.Atualizar(cantor);
-            return View("Put");
+            CantorRepository cantorRepository = new CantorRepository();
+            cantorRepository.Atualizar(cantor);
+            return RedirectToAction("Index","Musica");
         }
-
-        public IActionResult Delete(Cantor cantor)
+      
+        public IActionResult Delete(int id)
         {
-            MusicaRepository musicaRepository = new MusicaRepository();
-            musicaRepository.Deletar(cantor.Id);
-            return View();
+            CantorRepository musicaRepository = new CantorRepository();
+            musicaRepository.Deletar(id);
+            return RedirectToAction("Index","Musica");
         }
     }
 }

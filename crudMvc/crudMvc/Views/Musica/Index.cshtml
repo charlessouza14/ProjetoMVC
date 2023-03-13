@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Lista de Artistas";
-    var listaUsuario = ViewBag.Cantores;
+    var listaCantor = ViewBag.Cantores;
 }
 
     <h1>Lista de Artistas</h1>
@@ -11,21 +11,24 @@
         <td>Nome da Música</td>
     </tr>
     @{
-        foreach (var c in listaUsuario)
+        foreach (var c in listaCantor)
         {
             <tr>
                 <td>@c.Id</td>
                 <td>@c.NomeCantor</td>
                 <td>@c.NomeMusica</td>
 
+                
                 <td>
-                    <a button asp-controller="Musica" asp-action="Put">Editar</a>
-                </td>
+                    <a href="Musica/GetFormUpdate?id=@c.Id" type="button" class="btn btn-primary"> EditarPorGet </a>
+                </td>               
                 <td>
-                    <a button asp-controller="Musica" asp-action="Get">Buscar</a>
-                </td>
-                <td>
-                    <a button asp-controller="Musica" asp-action="Delete">Apagar</a>
+                    <form action="Musica/Delete" method="post">
+                        
+                        <input name="id" value="@c.Id" type="hidden" />
+                        <button type="submit"> Deletar</button>
+                       
+                    </form>
                 </td>
             </tr>
         }
@@ -34,3 +37,10 @@
 </table>
 <hr/>
     <a href="Musica/PostForm" type="button" class="btn btn-primary" > Adicionar </a>
+    <hr />
+    <form action="Musica/GetForName" method="post">
+
+        <input name="nome" type="text"/>
+        <button type="submit">Buscar</button>
+
+    </form>

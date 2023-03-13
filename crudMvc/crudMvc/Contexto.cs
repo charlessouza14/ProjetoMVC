@@ -18,11 +18,11 @@ namespace crudMvc
 
         //}    
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //    modelBuilder.Entity<Cantor>().HasKey(c => c.Id);
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Cantor>().HasKey(c => c.Id);
+        }
 
 
     }

@@ -1,4 +1,5 @@
-﻿using crudMvc.Models;
+﻿using crudMvc.Controllers;
+using crudMvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -8,7 +9,7 @@ using System.Threading;
 
 namespace crudMvc.Repository
 {
-    public class MusicaRepository : ControllerBase
+    public class CantorRepository : ControllerBase
     {
         public List<Cantor> BuscarTudo()
         {
@@ -48,13 +49,12 @@ namespace crudMvc.Repository
             return atualizar;
         }
 
-        public Cantor Deletar(int id)
+        public void Deletar(int id)
         {
             Contexto contexto = new Contexto();
-            var deletarMusica = contexto.Cantor.FirstOrDefault(c =>c.Id == id);
-            contexto.Cantor.Remove(deletarMusica);
-            contexto.SaveChanges();
-            return(deletarMusica);
+            var deletar = contexto.Cantor.FirstOrDefault(c => c.Id == id);
+            contexto.Cantor.Remove(deletar);
+            contexto.SaveChanges();            
         }
     }
 }
